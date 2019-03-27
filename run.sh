@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CONFIG_DIR=$(dirname ${BASH_SOURCE[0]})/config
+ROOT_DIR=$(dirname ${BASH_SOURCE[0]})
+CONFIG_DIR=$ROOT_DIR/config
 source $CONFIG_DIR/shell_config/network.cfg
 source $CONFIG_DIR/shell_config/image.cfg
 source $CONFIG_DIR/shell_config/volume.cfg
@@ -107,6 +108,8 @@ connect_network_to_image() {
     docker network connect $TMP_BRIDGE_NAME $TMP_CONTAINER_NAME
 }
 
+pushd $ROOT_DIR
+
 # Pull images
 echo "Pull Images!"
 pull_docker_image $HSS_DB_IMAGE
@@ -156,3 +159,6 @@ echo "Connect Traffic into s11_net, s1u_net, and sgi_net"
 connect_network_to_image $S11_NET_NAME $TRAFFIC_NAME
 connect_network_to_image $S1U_NET_NAME $TRAFFIC_NAME
 connect_network_to_image $SGI_NET_NAME $TRAFFIC_NAME
+
+popd
+
