@@ -91,7 +91,7 @@ get_volume_param() {
     for ELEM in ${TMP_ORIG_PARAM[@]}
     do
         RETURN=$RETURN"-v ${CONFIG_DIR}/${TMP_ORIG_PARAM[ITER_IDX]}:${TMP_TARGET_PARAM[ITER_IDX]} "
-        ITER_IDX=$(expr $ITER + 1)
+        ITER_IDX=$(expr $ITER_IDX + 1)
     done
     echo $RETURN
 }
