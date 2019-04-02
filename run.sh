@@ -39,19 +39,19 @@ pull_docker_image() {
 get_origin_volume_params() {
     case "$1" in
         $HSS_DB_NAME)
-            echo ${CONFIG_DIR}/${HSS_DB_CFG_ORIG[@]}
+            echo ${HSS_DB_CFG_ORIG[@]}
             ;;
         $HSS_NAME)
-            echo ${CONFIG_DIR}/${HSS_CFG_ORIG[@]}
+            echo ${HSS_CFG_ORIG[@]}
             ;;
         $MME_NAME)
-            echo ${CONFIG_DIR}/${MME_CFG_ORIG[@]}
+            echo ${MME_CFG_ORIG[@]}
             ;;
         $SPGWC_NAME)
-            echo ${CONFIG_DIR}/${NGIC_CFG_ORIG[@]}
+            echo ${NGIC_CFG_ORIG[@]}
             ;;
         $SPGWU_NAME)
-            echo ${CONFIG_DIR}/${NGIC_CFG_ORIG[@]}
+            echo ${NGIC_CFG_ORIG[@]}
             ;;
         *)
             echo ""
@@ -88,9 +88,9 @@ get_volume_param() {
     TMP_TARGET_PARAM=( $(get_target_volume_params $TMP_CONTAINER_NAME) )
     RETURN=""
     ITER_IDX=0
-    for ELEM in TMP_ORIG_PARAM
+    for ELEM in ${TMP_ORIG_PARAM[@]}
     do
-        RETURN=$RETURN"-v ${TMP_ORIG_PARAM[ITER_IDX]}:${TMP_TARGET_PARAM[ITER_IDX]} "
+        RETURN=$RETURN"-v ${ROOT_DIR}/${TMP_ORIG_PARAM[ITER_IDX]}:${TMP_TARGET_PARAM[ITER_IDX]} "
         ITER_IDX=$(expr $ITER + 1)
     done
     echo $RETURN
