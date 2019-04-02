@@ -1,0 +1,3 @@
+FROM woojoong/omec-hss:v1-debug
+
+RUN cd /opt/c3po/hss/conf && rm -rf acl.conf hss.conf hss.json oss.json

@@ -1,0 +1,3 @@
+FROM woojoong/omec-mme:v1-debug
+
+RUN cd /opt/openmme/src && rm -rf ./mme-app/conf/mme.json ./s1ap/conf/s1ap.json ./s11/conf/s11.json ./s6a/conf/s6a.json

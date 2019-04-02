@@ -1,0 +1,3 @@
+FROM woojoong/omec-spgwu:v1-debug
+
+RUN cd /opt/ngic-rtc/config && rm -rf ./*

@@ -1,0 +1,3 @@
+FROM woojoong/omec-cassandra:v1-debug
+
+RUN rm -rf /etc/cassandra/cassandra.yaml && rm -rf cassandra-rackdc.properties
