@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ROOT_DIR=$(dirname ${BASH_SOURCE[0]})
+ROOT_DIR_ABS=$(realpath ${BASH_SOURCE[0]})
+ROOT_DIR=$(dirname $ROOT_DIR_ABS)
 CONFIG_DIR=$ROOT_DIR/config
 source $CONFIG_DIR/shell_config/network.cfg
 source $CONFIG_DIR/shell_config/image.cfg
@@ -25,8 +26,8 @@ get_gateway_ip() {
 }
 
 set_docker_bridge() {
-    TMP_BRIDGE_NAME=$1
-    TMP_SUBNET=$2
+    TMP_BRIDGE_NAME=$2
+    TMP_SUBNET=$1
     docker network create --driver=bridge --subnet=$TMP_SUBNET --ip-range=$TMP_SUBNET --gateway=$(get_gateway_ip $TMP_SUBNET) $TMP_BRIDGE_NAME
 }
 
@@ -38,19 +39,19 @@ pull_docker_image() {
 get_origin_volume_params() {
     case "$1" in
         $HSS_DB_NAME)
-            echo ${HSS_DB_CFG_ORIG[@]}
+            echo ${CONFIG_DIR}/${HSS_DB_CFG_ORIG[@]}
             ;;
         $HSS_NAME)
-            echo ${HSS_CFG_ORIG[@]}
+            echo ${CONFIG_DIR}/${HSS_CFG_ORIG[@]}
             ;;
         $MME_NAME)
-            echo ${MME_CFG_ORIG[@]}
+            echo ${CONFIG_DIR}/${MME_CFG_ORIG[@]}
             ;;
         $SPGWC_NAME)
-            echo ${NGIC_CFG_ORIG[@]}
+            echo ${CONFIG_DIR}/${NGIC_CFG_ORIG[@]}
             ;;
         $SPGWU_NAME)
-            echo ${NGIC_CFG_ORIG[@]}
+            echo ${CONFIG_DIR}/${NGIC_CFG_ORIG[@]}
             ;;
         *)
             echo ""
